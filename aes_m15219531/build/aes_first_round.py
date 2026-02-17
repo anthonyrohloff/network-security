@@ -1,6 +1,6 @@
 from pathlib import Path
 from aes_m15219531.src.setup_functions import _generate_4x4_matrix, _string_to_hex
-from aes_m15219531.src.aes_functions import _add_key
+from aes_m15219531.src.aes_functions import _add_key, _sub_bytes, _shift_rows
 
 
 def aes_first_round(plaintext_input, subkey0_input, subkey1_input):
@@ -14,10 +14,14 @@ def aes_first_round(plaintext_input, subkey0_input, subkey1_input):
     # Compute AddKey with subkey0 before first round of AES
     text = _add_key(text, subkey0)
 
+    text = _sub_bytes(text)
+
     # Create 2D array for text, subkey0, and subkey1
     text = _generate_4x4_matrix(text)
     subkey0 = _generate_4x4_matrix(subkey0)
     subkey1 = _generate_4x4_matrix(subkey1)
+
+    text = _shift_rows(text)
  
     return text
 
