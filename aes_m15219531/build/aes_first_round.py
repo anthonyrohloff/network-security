@@ -11,14 +11,14 @@ def aes_first_round(plaintext_input, subkey0_input, subkey1_input):
     subkey0 = _string_to_hex(subkey0_input)
     subkey1 = _string_to_hex(subkey1_input)
 
-    # Create 2D array for initial_state, subkey0, and subkey1
+    # Compute AddKey with subkey0 before first round of AES
+    text = _add_key(text, subkey0)
+
+    # Create 2D array for text, subkey0, and subkey1
     text = _generate_4x4_matrix(text)
     subkey0 = _generate_4x4_matrix(subkey0)
     subkey1 = _generate_4x4_matrix(subkey1)
-
-    # Compute AddKey with subkey0 before first round of AES
-    # text = _add_key(text, subkey0)
-
+ 
     return text
 
 

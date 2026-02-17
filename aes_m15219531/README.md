@@ -10,4 +10,4 @@
 
 **Output:** Encrypted result
 
-**To Use:** run `python -m aes_m15219531.build.aes_first_round`
+**To Use:** run `python -m aes_m15219531.build.aes_first_round` from the directory ABOVE aes_m15219531
