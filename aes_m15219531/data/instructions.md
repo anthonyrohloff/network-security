@@ -9,3 +9,5 @@
 5. AddKey
 
 **Output:** Encrypted result
+
+**To Use:** run `python -m aes_m15219531.build.aes_first_round`
