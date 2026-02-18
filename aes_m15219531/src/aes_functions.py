@@ -364,6 +364,11 @@ def _shift_rows(text):
 
 
 def _mix_columns(text):
+    """
+    text: 4x4 matrix
+
+    returns: 4x4 matrix
+    """
     mix_cols_constant = [[2, 3, 1, 1], [1, 2, 3, 1], [1, 1, 2, 3], [3, 1, 1, 2]]
 
     # Init result matrix with 0's
@@ -381,6 +386,12 @@ def _mix_columns(text):
 
 
 def _gf_mul(num1, num2):
+    """
+    num1: hex literal
+    num2: hex literal
+
+    returns: hex literal
+    """
     output = 0
 
     while num2:

@@ -1,4 +1,9 @@
 def _hex_convert(input_array):
+    """
+    input_array: 4x4 matrix
+
+    returns: 4x4 matrix of hex literals
+    """
     output_array = []
     for row in input_array:
         for val in row:
@@ -44,7 +49,11 @@ def _string_to_hex(input_string):
 
 
 def _swap_cols_rows(input_array):
-    # Swap rows and columns in text
+    """
+    input_array: 4x4 matrix
+
+    returns: 4x4 matrix
+    """
     cols_to_rows = []
     for i in range(4):
         cols_to_rows.append(
