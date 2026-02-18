@@ -1,6 +1,16 @@
 from pathlib import Path
-from aes_m15219531.src.setup_functions import _generate_4x4_matrix, _string_to_hex
-from aes_m15219531.src.aes_functions import _add_key, _sub_bytes, _shift_rows, _mix_columns, hex_convert
+from aes_m15219531.src.setup_functions import (
+    _hex_convert,
+    _generate_4x4_matrix,
+    _string_to_hex,
+    _swap_cols_rows,
+)
+from aes_m15219531.src.aes_functions import (
+    _add_key,
+    _sub_bytes,
+    _shift_rows,
+    _mix_columns,
+)
 
 
 def aes_first_round(plaintext_input, subkey0_input, subkey1_input):
@@ -12,15 +22,9 @@ def aes_first_round(plaintext_input, subkey0_input, subkey1_input):
     subkey1 = _string_to_hex(subkey1_input)
 
     # Create 2D array for text, subkey0, and subkey1
-    text = _generate_4x4_matrix(text)
-    subkey0 = _generate_4x4_matrix(subkey0)
-    subkey1 = _generate_4x4_matrix(subkey1)
-
-    # Swap rows and columns in text
-    cols_to_rows = []
-    for i in range(4):
-        cols_to_rows.append([text[0][i], text[1][i], text[2][i], text[3][i]])
-    text = cols_to_rows
+    text = _swap_cols_rows(_generate_4x4_matrix(text))
+    subkey0 = _swap_cols_rows(_generate_4x4_matrix(subkey0))
+    subkey1 = _swap_cols_rows(_generate_4x4_matrix(subkey1))
 
     # Perform AES calculations
     text = _add_key(text, subkey0)
@@ -29,12 +33,7 @@ def aes_first_round(plaintext_input, subkey0_input, subkey1_input):
     text = _mix_columns(text)
     text = _add_key(text, subkey1)
 
-    ciphertext = []
-    for row in text:
-        for val in row:
-            ciphertext.append(hex(val))
-
-    return ciphertext
+    return text
 
 
 if __name__ == "__main__":
@@ -56,4 +55,4 @@ if __name__ == "__main__":
     subkey1 = subkey1.rstrip()
 
     ciphertext = aes_first_round(plaintext, subkey0, subkey1)
-    print(ciphertext)
+    print(f"Ciphertext: {_hex_convert(ciphertext)}")
