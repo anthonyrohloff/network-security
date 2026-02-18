@@ -56,3 +56,9 @@ if __name__ == "__main__":
 
     ciphertext = aes_first_round(plaintext, subkey0, subkey1)
     print(f"Ciphertext: {_hex_convert(ciphertext)}")
+
+    # Write to result.txt
+    with open(project_dir / "data" / "result.txt", "w") as file:
+        for row in ciphertext:
+            line = " ".join(f"0x{byte:02x}" for byte in row)
+            file.write(line + "\n")
